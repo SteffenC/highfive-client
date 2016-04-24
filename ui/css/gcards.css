@@ -1,0 +1,89 @@
+* {
+    box-sizing: border-box;
+}
+
+main {
+  display:block;
+  position:relative;
+  width:98%;
+  margin:3vh auto;
+  padding:1.5rem 0 0;
+  background:#333;
+  outline
+  border-radius:.25rem;
+  overflow:hidden;
+  /*transform:scale(.75);*/
+  transform-origin:center 3rem;
+  transition:transform .3s;
+}
+body:hover main {
+  transform:scale(1);
+}
+.card {
+  padding:1.5rem;
+  box-shadow:0 1px 2px #aaa;
+  background:white;
+  margin:0 1rem 1rem;
+  border-radius:3px;
+  user-select:none;
+  animation:fly-in-from-left .5s 1s ease both;
+  transform-origin:top left;
+  width: 22%;
+  float: left;
+}
+.card:nth-child(even){
+  animation-name:fly-in-from-right;
+  animation-delay:1.1s;
+  transform-origin:top right;
+}
+@keyframes fly-in-from-left {
+  from {
+    transform:translateY(15rem) rotate(15deg);
+    opacity:0;
+  }
+}
+
+@keyframes fly-in-from-right {
+  from {
+    transform:translateY(15rem) rotate(-15deg);
+    opacity:0;
+  }
+}
+
+.card:after {
+  position:absolute;
+  font-size:.9rem;
+  top:1.5rem;
+  right:1rem;
+  content:"i";
+  border:thin solid #26A69A;;
+  color:#26A69A;
+  width:1rem;
+  line-height:1rem;
+  text-align:center;
+  border-radius:50%;
+  pointer-events:none;
+}
+
+h1 {
+  font-size:2rem;
+  font-weight:200;
+}
+  strong {
+    font-weight:300;
+    color:#539D00;
+  }
+
+h2 {
+  font-size:.9rem;
+  line-height:2.5;
+  color:gray;
+  font-weight:400;
+}
+
+.map {
+  height:12rem;
+  background:#26A69A;
+  margin:.5rem 0 0 -1.5rem;
+  width:28rem;
+}
