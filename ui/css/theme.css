@@ -1,6 +1,9 @@
 html, body {
 	 width: 100%;
  }
+ #topHeader {
+	 text-align: center;
+ }
  table{
 	 margin: 0 auto;
  }
@@ -32,15 +35,15 @@ body {
 }
 
 h1 {
-	color:#faa;
+	color:#4D4D4D;
 }
 
 h2 {
-	color:#e88;
+	color:#42EDE4;
 }
 
 h3 {
-	color:#b66;
+	color:#fff;
 }
 
 h4 {

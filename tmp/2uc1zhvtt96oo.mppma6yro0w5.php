@@ -10,7 +10,11 @@
   </style>
 </head>
 <body>
-  <img height=""; width="100%" src="ui/css/logo.png" />
+  <div id="topHeader">
+    <img height=""; width="15%" src="ui/css/logo-box.png" />
+    <h1>The place for inspiring new products, everyday!</h1>
+    <h3>Share, rent and exchange your passion!</h3>
+  </div>
   <h1 id="products" hidden> <?php echo $products; ?> </h1>
 
 <main id="main">
@@ -50,6 +54,7 @@ function drawRow(rowData) {
     card.appendChild(h2);
 
     var img  = document.createElement("IMG");
+    img.style.maxHeight = "42%";
     img.src  = rowData.picture;
     card.appendChild(img);
 }

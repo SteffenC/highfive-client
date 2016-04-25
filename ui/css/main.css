@@ -11,20 +11,24 @@
    ========================================================================== */
 
 html {
-    background:#333;
+    background:#2CBBBB;
     color: #222;
     font-size: 1em;
     line-height: 1.4;
 }
 
+#formlogin {
+  display: inline;
+  top: 75% !important;
+}
+
 video#promoter {
     position: fixed;
-    top: 75%;
     left: 50%;
+    top: 75%;
     min-width: 100%;
-    height: 50%;
-    width: auto;
     height: auto;
+    width: auto;
     z-index: -100;
     -ms-transform: translateX(-50%) translateY(-50%);
     -moz-transform: translateX(-50%) translateY(-50%);
