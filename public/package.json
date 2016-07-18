@@ -1,0 +1,15 @@
+{
+  "name": "hifivApp",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "^1.5.5",
+    "bootstrap": "^3.3.6",
+    "angular-animate": "^1.5.5",
+    "angular-cookies": "^1.5.5",
+    "angular-resource": "^1.5.5",
+    "angular-route": "^1.5.5"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.5.5"
+  }
+}

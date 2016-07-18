@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en" ng-app="hifivApp">
+<head>
+    <meta charset="utf-8">
+    <title>HighFive!</title>
+    <link rel="stylesheet" href="../views/css/bootstrap.css" />
+    <script src="../views/bower_components/angular/angular.js"></script>
+    <script src="../views/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="../views/bower_components/angular-route/angular-route.js"></script>
+    <script src="../views/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/ejs.min.js"></script>
+    <script src="../js/controllers/MainController.js"></script>
+    <script src="../js/controllers/ProductController.js"></script>
+
+    <script src="../js/services.js"></script>
+    <script src="../js/directives.js"></script>
+
+    <!-- Style imports and dependencies -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400' rel='stylesheet' type='text/css'>
+    <link href="../views/css/bootstrap.css" rel="stylesheet" />
+    <link href="../views/css/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/gcards.css"/>
+</head>
+<body>
+
+<div class="header">
+    <!-- Navigation bar -->
+    <div class="container-fluid">
+        <div class="navbar-fixed-top">
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><img src="../img/highfive.png" class="navbar-brand" a href="#/main"></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="https://139.59.128.218:8080/profile">Profile</a></li>
+                    <li><a href="https://139.59.128.218:8080/products">Products</a></li>
+                </ul>                
+            </div>
+        </div>
+</div>
+
+<h1 hidden id="account"> <%= JSON.stringify(account) %>  </h1>
+<h1 hidden id="facebook"> <%= JSON.stringify(facebook) %>  </h1>
+
+<div id="formlogin">
+    <div style="min-height:350px" id="main1" class="form-style-8">
+    <h2>First party information</h2>
+    </div>    
+    <div style="min-height:350px" id="main2" class="form-style-8">
+    <h2 id="idpHeading" >Third party information</h2>
+    <img style="float: right;" height="180px" id="fbimage" src=<%= facebook.location %>>
+    </div>
+</div>
+</div>
+
+<div class="footer">
+    <div class="container">
+        <h2>Download for iPhone and Android.</h2>
+        <img src="img/app-store.png" width="120px" />
+        <img src="img/google-play.png" width="110px" />
+    </div>
+    <div class="col-xs-5 line"><hr></div>
+    <div class="col-xs-2 logo">highfive</div>
+    <div class="col-xs-5 line"><hr></div>
+    <div class="footer">Copyright 2016. All rights reserved.</div>
+</div>
+
+
+</body>
+<script>
+drawInfo(document.getElementById('account').innerHTML);
+drawFacebook(document.getElementById('facebook').innerHTML);
+function drawInfo(data) {
+    rowData = JSON.parse(data)
+    var main1 = document.getElementById('main1');
+
+
+    if(rowData == "Forbidden") {
+      var description = document.createElement('h3');
+      description.innerHTML = "Request for additional info has been sent. Look back later!";
+      main1.appendChild(description);
+    }else {
+
+    // Init new card
+
+    var firstnameLabel       = document.createElement("h3");
+    firstnameLabel.innerHTML = "Firstname:";
+    var firstname            = document.createElement("strong");
+    firstname.innerHTML      = rowData.firstname;
+
+    var lastnameLabel        = document.createElement("h3");
+    lastnameLabel.innerHTML  = "Lastname:";
+    var lastname             = document.createElement("strong");
+    lastname.innerHTML       = rowData.lastname;
+    
+    // Build card
+
+    main1.appendChild(firstnameLabel);
+    main1.appendChild(firstname);
+    main1.appendChild(lastnameLabel);
+    main1.appendChild(lastname);
+  }
+}
+
+function drawFacebook(data){
+    rowData = JSON.parse(data)
+    var main2 = document.getElementById('main2');
+
+
+    if(rowData == "Forbidden") {
+      var description = document.createElement('h3');
+      description.innerHTML = "Request for additional info has been sent. Look back later!";
+      main2.appendChild(description);
+    }else {
+        var locationLabel      = document.createElement("h3");
+        locationLabel.innerHTML = "Location:";
+        var location            = document.createElement("strong");
+        location.innerHTML      = rowData.userlocation;
+
+        main2.appendChild(locationLabel);
+        main2.appendChild(location);        
+    }
+
+}
+</script>
+
+</html>

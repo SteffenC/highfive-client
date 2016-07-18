@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" ng-app="hifivApp">
+<head>
+    <meta charset="utf-8">
+    <title>HighFive! - Connect your social networks!</title>
+    <link rel="stylesheet" href="views/css/bootstrap.css" />
+    <script src="views/bower_components/angular/angular.js"></script>
+    <script src="views/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="views/bower_components/angular-route/angular-route.js"></script>
+    <script src="views/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/ejs.min.js"></script>
+    <script src="js/controllers/MainController.js"></script>
+    <script src="js/controllers/ProductController.js"></script>
+
+    <script src="js/services.js"></script>
+    <script src="js/directives.js"></script>
+
+    <!-- Style imports and dependencies -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400' rel='stylesheet' type='text/css'>
+    <link href="views/css/bootstrap.css" rel="stylesheet" />
+    <link href="views/css/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/gcards.css"/>
+</head>
+<body>
+
+<div class="header">
+    <!-- Navigation bar -->
+    <div class="container-fluid">
+        <div class="navbar-fixed-top">
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><img src="img/highfive.png" class="navbar-brand" a href="#/main"></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="http://139.59.128.218:12576/profile">Profile</a></li>
+                    <li><a href="http://139.59.128.218:12576/products">Products</a></li>
+                </ul>                
+            </div>
+        </div>
+    </div>
+</div>
+  
+
+
+  <div id="topHeader">
+    <h1>Choose an identity</h1>
+    <h3>Enhance your online trust-indication through tird-party identities</h3>
+  </div>
+  <div class="form-style-8">
+  <a class="" href="https://www.facebook.com/dialog/oauth?app_id=1724357184474755&redirect_uri=http://139.59.128.218:12576/fbtoken"> <img width:"900px" style="margin:0 auto" src="https://d106kdhqpps9un.cloudfront.net/assets/facebook-connect-button-390x60-9d058c556344123297a221621cb4220e.png" /> </a>
+</div>
+
+
+
+<div class="footer">
+    <div class="container">
+        <h2>Download for iPhone and Android.</h2>
+        <img src="img/app-store.png" width="120px" />
+        <img src="img/google-play.png" width="110px" />
+    </div>
+    <div class="col-xs-5 line"><hr></div>
+    <div class="col-xs-2 logo">highfive</div>
+    <div class="col-xs-5 line"><hr></div>
+    <div class="footer">Copyright 2016. All rights reserved.</div>
+</div>
+
+
+<!--<div> <img class="prof_pic" src="img/dwight_img.jpg" /></div>-->
+
+
+
+</body>
+</html>

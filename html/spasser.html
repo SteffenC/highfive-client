@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+</head>
+<body>
+  <form method="post" action="/login">
+<input type="text" id="user" name="user" />
+<input type="password" id="pass" name="pass" />
+<button type="submit">Login</button>
+</form>
+
+  <form method="post" action="/createuser">
+    <input type="text" id="user" name="firstname" />
+    <input type="text" id="test" name="lastname" />
+    <button type="submit">Test</button>
+  </form>
+  <button method="get" action="/fbtoken">Tryk</button>
+
+
+
+  <a href="https://www.facebook.com/dialog/oauth?app_id=1724357184474755&redirect_uri=http://139.59.128.218:12576/fbtoken"> Facebook</a>
+
+  <div class="container">
+
+    <div class="jumbotron text-center">
+        <h1><span class="fa fa-lock"></span> Node Authentication</h1>
+
+        <p>Login or Register with:</p>
+
+        <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
+
+    </div>
+
+</body>
+
+</html>

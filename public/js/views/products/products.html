@@ -1,0 +1,45 @@
+
+<!-- Products -->
+<div class="main" ng-controller="MainController">
+    <div class="container">
+        <img ng-src="{{ product.profile_pic }}" />
+
+        <h1>{{ title }}</h1>
+        <img ng-src="{{ product.profile_pic }}" />
+        <div layout="column" layout-align="start start">
+            <div ng-repeat="product in products" class="col-md-4">
+
+                <div class="thumbnail">
+                    <img ng-src="{{ product.cover }}" />
+                    <p class="item">{{ product.item }}</p>
+                    <p class="price">{{ product.price | currency:"DKK" }} /day</p>
+                    <p class="date">Available: {{ product.startdate | date }} - {{ product.enddate | date }}</p>
+                    <p class="owner">Owner: <a href="#" class="contact"> {{ product.owner }} </a></p>
+                    <p class="rating">Rating:</p>
+                    <div class="rating">
+                        <p class="likes" ng-click="plusOne($index)">+ {{ product.likes }} </p>
+                        <p class="dislikes" ng-click="minusOne($index)">- {{ product.dislikes }} </p>
+                    </div>
+                    <!--<div class="container">
+                    <img src="img/highfive.png" width="150px" align="right" />
+                    <h1>{{ title }}</h1>
+
+                    <div class="container-fluid">
+                        <div ng-repeat="product in products" class="col-md-4">
+                            <div class="thumbnail">
+                                <img ng-src="{{ product.cover }}">
+                                <p class="item">{{ product.item }}</p>
+                                <p class="price">{{ product.price | currency:"DKK" }} /day</p>
+                                <p class="date">Available: {{ product.startdate | date }} - {{ product.enddate | date }}</p>
+                                <p class="owner">Owner: <a href="#" class="contact"> {{ product.owner }} </a></p>
+                                <p class="rating">Rating:</p>
+                                <div class="rating">
+                                    <p class="likes" ng-click="plusOne($index)">+ {{ product.likes }} </p>
+                                    <p class="dislikes" ng-click="minusOne($index)">- {{ product.dislikes }} </p>
+                                </div>-->
+              </div>
+
+         </div>
+     </div>
+    </div>
+</div>

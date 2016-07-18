@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en" ng-app="hifivApp">
+<head>
+    <meta charset="utf-8">
+    <title>HighFive! - All products! </title>
+    <link rel="stylesheet" href="views/css/bootstrap.css" />
+    <script src="../views/bower_components/angular/angular.js"></script>
+    <script src="views/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="views/bower_components/angular-route/angular-route.js"></script>
+    <script src="views/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/ejs.min.js"></script>
+    <script src="js/controllers/MainController.js"></script>
+    <script src="js/controllers/ProductController.js"></script>
+
+    <script src="js/services.js"></script>
+    <script src="js/directives.js"></script>
+
+    <!-- Style imports and dependencies -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400' rel='stylesheet' type='text/css'>
+    <link href="views/css/bootstrap.css" rel="stylesheet" />
+    <link href="views/css/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/gcards.css"/>
+</head>
+<body>
+
+<div class="header">
+    <!-- Navigation bar -->
+    <div class="container-fluid">
+        <div class="navbar-fixed-top">
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="https://139.59.128.218:8080/new">Create Product</a></li>
+                    <li><img src="img/highfive.png" class="navbar-brand" a href="#/main"></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="https://139.59.128.218:8080/profile">Profile</a></li>
+                    <li><a href="https://139.59.128.218:8080/products">Products</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="topHeader">
+    <h3>The place for inspiring new products, everyday!</h3>
+    <h1>Share, rent and exchange your passion!</h1>
+</div>
+
+<h1 hidden id="products" hidden> <%= JSON.stringify(products) %> </h1>
+<h1 hidden id="user" > <%= JSON.stringify(user) %> </h1>
+<main id="main">
+
+</main>
+
+<div class="footer">
+    <div class="container">
+        <h2>Download for iPhone and Android.</h2>
+        <img src="img/app-store.png" width="120px" />
+        <img src="img/google-play.png" width="110px" />
+    </div>
+    <div class="col-xs-5 line"><hr></div>
+    <div class="col-xs-2 logo">highfive</div>
+    <div class="col-xs-5 line"><hr></div>
+    <div class="footer">Copyright 2016. All rights reserved.</div>
+
+
+</div>
+
+
+<!--<div> <img class="prof_pic" src="img/dwight_img.jpg" /></div>-->
+
+
+
+</body>
+<script>
+drawTable(document.getElementById('products').innerHTML);
+function drawTable(data) {
+  data = JSON.parse(data);
+
+  for (var i = 0; i < data.length; i++) {
+    console.log(data[i]);
+    drawRow(data[i]);
+  }
+}
+
+function drawRow(rowData) {
+  console.log(rowData);
+    // Init new card
+    var main = document.getElementById('main');
+    var card = document.createElement("section");
+    var a    = document.createElement("A");
+    card.className = "card";
+
+    // Heading
+    var h1   = document.createElement("H1");
+    h1.innerHTML = rowData.title;
+    a.appendChild(h1);
+    a.href = "/products/" + rowData._id;
+
+    // Description
+    var h2   = document.createElement("p");
+    h2.innerHTML = rowData.description;
+
+    // Price
+    var pri  = document.createElement("STRONG");
+    pri.innerHTML = "Price: " + rowData.price;
+
+    // Image
+    var img  = document.createElement("IMG");
+    img.style.maxHeight = "42%";
+    img.src  = rowData.picture;
+
+    // Build card
+    main.appendChild(card);
+    card.appendChild(a);
+    card.appendChild(pri);
+    card.appendChild(h2);
+    card.appendChild(img);
+}
+
+</script>
+
+</html>

@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en" ng-app="hifivApp">
+<head>
+    <title>HighFive! - Your profile!</title>
+    <link rel="stylesheet" href="views/css/bootstrap.css" />
+    <script src="views/bower_components/angular/angular.js"></script>
+    <script src="views/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="views/bower_components/angular-route/angular-route.js"></script>
+    <script src="views/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/ejs.min.js"></script>
+    <script src="js/controllers/MainController.js"></script>
+    <script src="js/controllers/ProductController.js"></script>
+<script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+    <script src="js/services.js"></script>
+    <script src="js/directives.js"></script>
+
+    <!-- Style imports and dependencies -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400' rel='stylesheet' type='text/css'>
+    <link href="views/css/bootstrap.css" rel="stylesheet" />
+    <link href="views/css/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/gcards.css"/>
+</head>
+<body>
+
+<div class="header">
+    <!-- Navigation bar -->
+    <div class="container-fluid">
+        <div class="navbar-fixed-top">
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><img src="img/highfive.png" class="navbar-brand" a href="#/main"></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="https://139.59.128.218:8080/profile">Profile</a></li>
+                    <li><a href="https://139.59.128.218:8080/products">Products</a></li>
+                </ul>                
+            </div>
+        </div>
+    </div>
+</div>
+
+<h1 hidden id="user"> <%= JSON.stringify(user) %>  </h1>
+<h1 hidden id="tickets"> <%= JSON.stringify(tickets) %>  </h1>
+<h1 hidden id="policies"> <%= JSON.stringify(policies) %>  </h1>
+<h1 hidden id="facebook"> <%= JSON.stringify(facebook) %>  </h1>
+
+<div id="formlogin">
+    <div style="min-height:350px" id="main1" class="form-style-8"> 
+        <h2>Your Information</h2>
+        <img style="float: right;" height="180px" id="fbimage" src=<%= facebook.location %> /> 
+    </div>
+</div>
+
+<div id="formlogin">
+    <div id="main2" class="form-style-8"> 
+    <h2>Request to access your resource</h2>
+    </div>
+</div>
+
+<div id="formlogin">
+    <div id="main3" class="form-style-8"> 
+    <h2>The following have access to some of your information</h2>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="container">
+        <h2>Download for iPhone and Android.</h2>
+        <img src="img/app-store.png" width="120px" />
+        <img src="img/google-play.png" width="110px" />
+    </div>
+    <div class="col-xs-5 line"><hr></div>
+    <div class="col-xs-2 logo">highfive</div>
+    <div class="col-xs-5 line"><hr></div>
+    <div class="footer">Copyright 2016. All rights reserved.</div>
+</div>
+
+
+</body>
+<script>
+
+granting = function(resource, grant){
+    var data = {"grant": grant, "resource_id": resource, "update": "add"};
+    $.ajax({
+      type: "POST",
+      url: "https://139.59.128.218:8080/policy",
+      data: data,
+      success: location.reload(),
+      dataType: "json"
+    });
+}
+
+revoking = function(resource, grant){
+    var data = {"grant": grant, "resource_id": resource, "update": "remove"};
+    $.ajax({
+      type: "POST",
+      url: "https://139.59.128.218:8080/policy",
+      data: data,
+      success: location.reload(),
+      dataType: "json"
+    });
+}
+
+drawInfo(document.getElementById('user').innerHTML);
+initDrawRequests(document.getElementById('tickets').innerHTML);
+initDrawPolicies(document.getElementById('policies').innerHTML);
+
+function drawInfo(data) {
+    rowData = JSON.parse(data)
+
+    // Init new card
+    var main = document.getElementById('main1');
+
+    var firstnameLabel       = document.createElement("h3");
+    firstnameLabel.innerHTML = "Firstname:";
+    var firstname            = document.createElement("strong");
+    firstname.innerHTML      = rowData.firstname;
+
+    var lastnameLabel        = document.createElement("h3");
+    lastnameLabel.innerHTML  = "Lastname:";
+    var lastname             = document.createElement("strong");
+    lastname.innerHTML       = rowData.lastname;
+    
+    // Build card
+
+    main1.appendChild(firstnameLabel);
+    main1.appendChild(firstname);
+    main1.appendChild(lastnameLabel);
+    main1.appendChild(lastname);
+}
+
+function initDrawRequests(data) {
+    data = JSON.parse(data);
+    var id = 0;
+    data.forEach(function(entry) {
+        drawRequests(entry, id++);
+    })
+}
+
+function drawRequests(rowData, id) {
+    console.log(rowData);
+    // Init new card
+    var main = document.getElementById('main2');
+
+    var requesterLabel       = document.createElement("h3");
+    requesterLabel.innerHTML = "Requesting user:";
+    var requester            = document.createElement("strong");
+    requester.innerHTML      = rowData.requester;
+   
+    var resourceLabel        = document.createElement("h3");
+    resourceLabel.innerHTML  = "Resource:";
+    var resource             = document.createElement("strong");
+    resource.innerHTML       = rowData.resource;
+
+    var resourceId                  = document.createElement("strong");
+    resourceId.innerHTML              = rowData.resource_id;
+    resourceId.hidden = true;
+
+    var scopeLabel           = document.createElement("h3");
+    scopeLabel.innerHTML     = "Scope:"
+    var scope                = document.createElement("strong");
+    scope.innerHTML          = rowData.scope;
+
+    var grant               = document.createElement('input');
+    grant.id                = id;
+    grant.value             = "Grant";
+    grant.style             = "float:right";
+    grant.type              = "button";
+    grant.onclick           = function(){
+        granting(rowData.resource_id, rowData.requester);
+    }
+
+    var hr                  = document.createElement("hr");
+
+    // Build card
+    main2.appendChild(requesterLabel);
+    main2.appendChild(requester);
+    main2.appendChild(resourceLabel);
+    main2.appendChild(resource);    
+    main2.appendChild(resourceId);
+    main2.appendChild(scopeLabel);
+    main2.appendChild(scope);
+    main2.appendChild(grant);
+    main2.appendChild(hr);
+}
+
+function initDrawPolicies(data) {
+    data = JSON.parse(data);
+    console.log(data);
+    data.policies.forEach(function(entry) {
+        console.log(entry);
+        drawPolicies(entry);
+    })
+}
+
+function drawPolicies(rowData, id) {
+    console.log(rowData);
+    // Init new card
+    var main3 = document.getElementById('main3');
+
+    var resourceLabel             = document.createElement("h3");
+    resourceLabel.innerHTML = "Resource ID:";
+    var resourceId            = document.createElement("strong");
+    resourceId.innerHTML      = rowData.resource_id;
+   
+    var grantedLabel        = document.createElement("h3");
+    grantedLabel.innerHTML  = "Users with access:";
+    var granted             = document.createElement("ul");
+
+    rowData.grant.forEach(function(entry) {
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.href = "http://139.59.128.218:12576/users/" + entry;
+        var t = document.createElement("strong");
+        t.innerHTML = entry;
+        
+        var deny                = document.createElement('a');
+        deny.innerHTML              = "Revoke";
+        deny.style              = "float:right";
+        deny.onclick = function(){
+          revoking(rowData.resource_id, entry);
+        }
+
+        a.appendChild(t);
+        li.appendChild(a);
+        li.appendChild(deny);
+        granted.appendChild(li);
+    })
+
+    // Build card
+    main3.appendChild(resourceLabel);
+    main3.appendChild(resourceId);
+    main3.appendChild(grantedLabel);    
+    main3.appendChild(granted);    
+}
+</script>
+
+</html>
